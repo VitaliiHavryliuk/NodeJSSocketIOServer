@@ -4,21 +4,33 @@ const io = require('socket.io')(http);
 const port = 8090;
 
 app.get('/', (req, res) => {
-  res.sendFile('C:\\Projects\\ServerSocketIO\\chat-example\\index.html');
+  res.sendFile('C:\\NodeJSSocketIOServer\\index.html');
 });
 
 io.on('connection', (socket) => {
-  socket.on('lock', msg => {
-    io.emit('lock', msg);
-    console.log('lock');
+  socket.on('Unlock', msg => {
+    io.emit('Unlock', { "transactionId":"2026"});
+    console.log('Unlock');
   });
-  socket.on('unlock', msg => {
-    io.emit('unlock', msg);
-    console.log('unlock');
+  socket.on('GetTransactionDetails', msg => {
+    io.emit('GetTransactionDetails', { "transactionId":"2026"});
+    console.log('GetTransactionDetails', msg);
   });
-  socket.on('LockTable', msg => {
-    io.emit('LockTable', {"employeeNum":"1231", "transactionId":"12312"});
-    console.log('LockTable');
+  socket.on('TransactionDetails', msg => {
+    io.emit('TransactionDetails', msg);
+    console.log('TransactionDetails', msg);
+  });
+  socket.on('Lock', msg => {
+    io.emit('Lock', { "transactionId":"2026"});
+    console.log('Lock');
+  });
+  socket.on('MakePayment', msg => {
+    io.emit('MakePayment', {"amount":10, "transactionId":"2026"});
+    console.log('MakePayment');
+  });
+  socket.on('subscribe', msg => {
+    io.emit('subscribe', msg);
+    console.log('subscribe');
   });
 });
 

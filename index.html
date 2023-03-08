@@ -32,26 +32,45 @@
       form.addEventListener('submit', function(e) {
         e.preventDefault();  
 
-        socket.emit(input.value, {"employeeNum":"1231"});        
+        socket.emit(input.value);        
       });
 
-      socket.on('LockTable', function(msg) {
+      socket.on('Lock', function(msg) {
         var item = document.createElement('li');
-        item.textContent = msg;
+        item.textContent = JSON.stringify(msg);
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
 
-      socket.on('unlock', function(msg) {
+      socket.on('Unlock', function(msg) {
         var item = document.createElement('li');
-        item.textContent = msg;
+        item.textContent = JSON.stringify(msg);
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      socket.on('subscribe', function(msg) {
+        var item = document.createElement('li');
+        item.textContent = JSON.stringify(msg);
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+      socket.on('TransactionDetails', function(msg) {
+        var item = document.createElement('li');
+        item.textContent = JSON.stringify(msg);
+        messages.appendChild(item);
+        window.scrollTo(0, document.body.scrollHeight);
+      });
+
+      socket.on('MakePayment', function(msg) {
+        var item = document.createElement('li');
+        item.textContent = JSON.stringify(msg);
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
 
       socket.on('GetTransactionDetails', function(msg) {
         var item = document.createElement('li');
-        item.textContent = msg;
+        item.textContent = JSON.stringify(msg);
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });
